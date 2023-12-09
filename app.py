@@ -47,15 +47,21 @@ def index():
 # Обробник для реєстрації
 @app.route('/register', methods=['POST'])
 def register():
+    # Отримання даних з форми
     email = request.form['email']
     password = request.form['password']
     age = request.form.get('age', None)
     gender = request.form.get('gender', None)
 
+    # Виклик функції для реєстрації користувача
     register_user(email, password, age, gender)
 
+    # Перенаправлення на головну сторінку після реєстрації
     return redirect(url_for('index'))
 
+# Запуск програми
 if __name__ == '__main__':
+    # Створення таблиці перед запуском
     create_table()
+    # Запуск додатка Flask у режимі відладки
     app.run(debug=True)
